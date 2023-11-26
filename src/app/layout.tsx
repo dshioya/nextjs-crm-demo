@@ -1,5 +1,8 @@
-import type { Metadata } from 'next'
-import { Roboto } from 'next/font/google'
+import type {Metadata} from 'next'
+import {Roboto} from 'next/font/google'
+import {Snackbar} from '@mui/material'
+import {SnackbarProvider} from '@/components/snackbar/SnackbarProvider'
+
 import './globals.css'
 
 const font = Roboto({ weight: '400', subsets: ['latin'] })
@@ -17,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <main>{children}</main>
+        <SnackbarProvider>
+          <main>{children}</main>
+        </SnackbarProvider>
       </body>
     </html>
   )

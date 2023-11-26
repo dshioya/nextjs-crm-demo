@@ -1,0 +1,18 @@
+version: "3"
+services:
+  db:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - db-data:/var/lib/mysql/
+    env_file: ./.docker-compose/mysql/.env
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --log_bin_trust_function_creators=1
+  memcached:
+    image: memcached:1.6.22
+    ports:
+      - 11211:11211
+volumes:
+  db-data:

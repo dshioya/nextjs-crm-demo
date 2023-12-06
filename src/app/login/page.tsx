@@ -1,15 +1,10 @@
-import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
-import LoginForm from './LoginForm'
-
-import styles from './page.module.css'
+import LoginButtons from './LoginButtons'
 
 export default function LoginPage() {
   return (
     <Container fixed>
-      <Box className={styles.box}>
-        <LoginForm />
-      </Box>
+      <LoginButtons />
     </Container>
   )
 }

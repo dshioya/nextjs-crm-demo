@@ -1,8 +1,7 @@
 'use client'
 
 import {createContext, useContext, useState, Fragment, ReactNode, SyntheticEvent} from 'react'
-import {Alert, IconButton, Snackbar} from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close';
+import {Alert, Snackbar} from '@mui/material'
 
 export type SnackbarParams = {
   type: 'success' | 'info' | 'warning' | 'error';
@@ -10,7 +9,7 @@ export type SnackbarParams = {
 }
 
 interface ISnackbarContext {
-  showMessage: ((params: SnackbarParams) => void);
+  showMessage: (params: SnackbarParams) => void;
 }
 
 const SnackbarContext = createContext<ISnackbarContext>({
@@ -26,12 +25,6 @@ export function SnackbarProvider({children}: { children: ReactNode }) {
   const [type, setType] = useState<'success' | 'info' | 'warning' | 'error'>('success')
   const [message, setMessage] = useState<string>('')
   const [key, setKey] = useState<number>(0)
-
-  const action = (
-    <IconButton aria-label="close">
-      <CloseIcon />
-    </IconButton>
-  )
 
   function onClose(event: SyntheticEvent | Event, reason?: string) {
     if (reason === 'clickaway') {

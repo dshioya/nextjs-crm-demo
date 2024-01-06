@@ -2,6 +2,7 @@ import type {Metadata} from 'next'
 import {Roboto} from 'next/font/google'
 import {SnackbarProvider} from '@/components/snackbar/SnackbarProvider'
 import {ThemeProvider} from '@mui/material/styles'
+import RootPage from '@/components/RootPage'
 import currentTheme from './theme'
 
 import './globals.css'
@@ -18,9 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ThemeProvider theme={currentTheme}>
       <html lang="en">
         <body className={font.className}>
-          <SnackbarProvider>
-            <main>{children}</main>
-          </SnackbarProvider>
+          <SnackbarProvider>{children}</SnackbarProvider>
         </body>
       </html>
     </ThemeProvider>

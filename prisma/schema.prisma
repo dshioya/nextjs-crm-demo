@@ -11,11 +11,29 @@ datasource db {
 }
 
 model Customer {
-  id        String   @id @default(cuid())
-  name      String
-  type      Int
-  postCode  String   @map("post_code")
-  address   String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id             String          @id @default(cuid())
+  shopCode       String
+  branchNumber   Int             @unique
+  type           Int
+  firstName      String          @map("first_name")
+  lastName       String          @map("last_name")
+  postalCode     String          @map("postal_code")
+  address        String
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  financialAsset FinancialAsset?
+
+  @@map("customer")
+}
+
+model FinancialAsset {
+  id            String   @id @default(cuid())
+  customer      Customer @relation(fields: [customerId], references: [id])
+  yenDeposit    Decimal
+  dollarDeposit Decimal
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  customerId    String   @unique
+
+  @@map("financial_asset")
 }

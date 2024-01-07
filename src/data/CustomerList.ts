@@ -2,10 +2,15 @@ import useSWR from 'swr'
 import {create} from 'zustand'
 
 export type Customer = {
-  id: number,
+  id: string,
+  shopCode: string,
+  branchNumber: number,
   lastName: string | null,
   firstName: string | null,
-  age: number | null
+  postalCode: string,
+  address: String,
+  createdAt: string,
+  updatedAt: string
 }
 
 type CustomerListResponse = {

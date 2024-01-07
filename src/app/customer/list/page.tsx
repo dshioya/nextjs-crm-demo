@@ -9,19 +9,25 @@ import {useFetchCustomers, useFetchParams} from '@/data/CustomerList';
 import styles from './page.module.css'
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-  { field: 'age', headerName: 'Age', type: 'number', width: 90 },
+  {
+    field: 'code',
+    headerName: '顧客コード',
+    sortable: false,
+    width: 140,
+    valueGetter: (params: GridValueGetterParams) =>
+      `${params.row.shopCode}-${params.row.branchNumber.toString().padStart(7, '0')}`
+  },
   {
     field: 'fullName',
-    headerName: 'Full name',
+    headerName: '顧客名',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 160,
     valueGetter: (params: GridValueGetterParams) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+      `${params.row.lastName} ${params.row.firstName}`
   },
+  { field: 'postalCode', headerName: '郵便番号', type: 'string', width: 120 },
+  { field: 'address', headerName: '住所', type: 'string', width: 180 },
 ];
 
 export default function CustomerListPage() {

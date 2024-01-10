@@ -12,14 +12,21 @@ export async function GET(request: Request) {
   const skip = (page || 1 - 1) * limit
 
   const customers = await prisma.customer.findMany({
-    skip,
-    take: limit,
+    where: {
+      deletedAt: null
+    },
     orderBy: {
       createdAt: 'asc'
-    }
+    },
+    skip,
+    take: limit
   })
 
-  const total = await prisma.customer.count()
+  const total = await prisma.customer.count({
+    where: {
+      deletedAt: null
+    }
+  })
 
   return Response.json({
     items: customers,

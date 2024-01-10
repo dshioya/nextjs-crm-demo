@@ -20,18 +20,23 @@ type CustomerListResponse = {
 
 type CustomerListParams = {
   page: number;
+  limit: number;
   setPage: (page: number) => void;
+  setLimit: (limit: number) => void;
 }
 
 export const useFetchParams = create<CustomerListParams>((set) => ({
   page: 0,
-  setPage: (page: number) => set(state => ({ page }))
+  limit: 5,
+  setPage: (page: number) => set(state => ({ page })),
+  setLimit: (limit: number) => set(state => ({limit}))
 }))
 
 async function fetchCustomers() {
   const state = useFetchParams.getState()
   const queryParams = new URLSearchParams({
-    page: state.page.toString()
+    page: state.page.toString(),
+    limit: state.limit.toString()
   })
 
   return fetch(`/api/customer/list?${queryParams}`)
